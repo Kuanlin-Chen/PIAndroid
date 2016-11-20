@@ -1,1 +1,2 @@
 # PIAndroid
+We apply the concept of Privacy Impact Assessment to design a system, which identifies App's permission requirements, detects the potentia l activities from the Logger and analyses the system configurations.
