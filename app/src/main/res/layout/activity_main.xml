@@ -21,7 +21,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Installed Apps = "
+                android:text="已安裝應用程式數量 = "
                 android:textSize="25sp"
                 android:textStyle="bold"
                 android:id="@+id/textView_title1" />
@@ -30,7 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="PIA Score ="
+                android:text="隱私衝擊評估分數 ="
                 android:textSize="25sp"
                 android:textStyle="bold"
                 android:id="@+id/textView_title2" />
@@ -48,7 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Detail"
+                android:text="詳細資料"
                 android:textSize="@dimen/activity_vertical_margin"
                 android:id="@+id/button_detail" />
 
@@ -56,7 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Refresh"
+                android:text="重新計算"
                 android:textSize="@dimen/activity_vertical_margin"
                 android:id="@+id/button_refresh" />
 

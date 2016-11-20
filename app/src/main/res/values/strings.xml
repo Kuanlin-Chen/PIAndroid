@@ -2,4 +2,12 @@
     <string name="app_name">PIAndroid</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
+    <string name="homepage">首頁</string>
+    <string name="permission">權限分析</string>
+    <string name="intent">意圖監控</string>
+    <string name="settings">組態設定</string>
+
+    <!--Intent關鍵字-->
+    <string name="SEND">android.intent.action.SEND</string>
+    <string name="VIEW">android.intent.action.VIEW</string>
 </resources>
