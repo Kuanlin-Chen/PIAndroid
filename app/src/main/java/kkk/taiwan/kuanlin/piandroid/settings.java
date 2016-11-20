@@ -48,7 +48,7 @@ public class settings extends AppCompatActivity{
     private FrameLayout frame_layout;
     private ListView listview_left;
     String[] Balls = new String[]
-            {"Home","Permission","Intent","Setting"};
+            {"首頁","權限分析","意圖監控","組態設定"};
     private AdapterView.OnItemClickListener listener = new AdapterView.OnItemClickListener()
     {
         @Override
@@ -57,28 +57,28 @@ public class settings extends AppCompatActivity{
 
             String sel = parent.getItemAtPosition(position).toString();
             //switch不能處理字串型別
-            if (sel.equals("Home"))
+            if (sel.equals("首頁"))
             {
                 Intent intent = new Intent();
                 intent.setClass(settings.this, MainActivity.class);
                 startActivity(intent);
                 settings.this.finish();
             }
-            else if (sel.equals("Permission"))
+            else if (sel.equals("權限分析"))
             {
                 Intent intent = new Intent();
                 intent.setClass(settings.this, permission.class);
                 startActivity(intent);
                 settings.this.finish();
             }
-            else if (sel.equals("Intent"))
+            else if (sel.equals("意圖監控"))
             {
                 Intent intent = new Intent();
                 intent.setClass(settings.this, intent.class);
                 startActivity(intent);
                 settings.this.finish();
             }
-            else if (sel.equals("Setting"))
+            else if (sel.equals("組態設定"))
             {}
         }
 
@@ -144,10 +144,10 @@ public class settings extends AppCompatActivity{
                 public void onClick(View v)
                 {
                     AlertDialog.Builder versioncheck_repair_ad=new AlertDialog.Builder(settings.this);
-                    versioncheck_repair_ad.setTitle("Version");
-                    versioncheck_repair_ad.setMessage("Android version is too old！");
-                    versioncheck_repair_ad.setNegativeButton("Skip", null);
-                    versioncheck_repair_ad.setPositiveButton("Fix", new DialogInterface.OnClickListener() {
+                    versioncheck_repair_ad.setTitle("Android版本");
+                    versioncheck_repair_ad.setMessage("Android版本太舊！");
+                    versioncheck_repair_ad.setNegativeButton("略過", null);
+                    versioncheck_repair_ad.setPositiveButton("修正", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int fix) {
                             startActivity(new Intent(Settings.ACTION_SETTINGS));
@@ -159,7 +159,7 @@ public class settings extends AppCompatActivity{
         }
         else
         {
-            textView_version_result.setText("Unknown");
+            textView_version_result.setText("未知");
             textView_version_result.setTextColor(Color.GREEN);
             button_version_fix.setText("");
             button_version_fix.setBackgroundColor(00000000);
@@ -185,10 +185,10 @@ public class settings extends AppCompatActivity{
                     @Override
                     public void onClick(View v) {
                         AlertDialog.Builder password_repair_ad = new AlertDialog.Builder(settings.this);
-                        password_repair_ad.setTitle("Screen Lock");
-                        password_repair_ad.setMessage("You have not set screen lock yet！");
-                        password_repair_ad.setNegativeButton("Skip", null);
-                        password_repair_ad.setPositiveButton("Fix", new DialogInterface.OnClickListener() {
+                        password_repair_ad.setTitle("密碼設定");
+                        password_repair_ad.setMessage("您尚未設定密碼！");
+                        password_repair_ad.setNegativeButton("略過", null);
+                        password_repair_ad.setPositiveButton("修正", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int fix) {
                                 startActivity(new Intent(Settings.ACTION_SECURITY_SETTINGS));
@@ -208,15 +208,15 @@ public class settings extends AppCompatActivity{
         }
         else
         {
-            textView_screenlock_result.setText("XXXX");
+            textView_screenlock_result.setText("XXX");
             textView_screenlock_result.setTextColor(Color.GRAY);
             button_screenlock_fix.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     AlertDialog.Builder password_repair_ad = new AlertDialog.Builder(settings.this);
-                    password_repair_ad.setTitle("Screen Lock");
-                    password_repair_ad.setMessage("This Constant was Deprecated in API 23！");
-                    password_repair_ad.setNegativeButton("Skip", null);
+                    password_repair_ad.setTitle("密碼設定");
+                    password_repair_ad.setMessage("Android 6.0 不支援此檢測功能！");
+                    password_repair_ad.setNegativeButton("略過", null);
                     password_repair_ad.show();
                 }
             });
@@ -238,10 +238,10 @@ public class settings extends AppCompatActivity{
                 @Override
                 public void onClick(View v) {
                     AlertDialog.Builder autolocktime_repair_ad = new AlertDialog.Builder(settings.this);
-                    autolocktime_repair_ad.setTitle("Auto-Lock Time");
-                    autolocktime_repair_ad.setMessage("Setting Auto-Lock Time, please select [Fix] button！");
-                    autolocktime_repair_ad.setNegativeButton("Skip", null);
-                    autolocktime_repair_ad.setPositiveButton("Fix", new DialogInterface.OnClickListener() {
+                    autolocktime_repair_ad.setTitle("自動鎖屏時間");
+                    autolocktime_repair_ad.setMessage("請設定自動鎖屏時間！");
+                    autolocktime_repair_ad.setNegativeButton("略過", null);
+                    autolocktime_repair_ad.setPositiveButton("修正", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int fix) {
                             Settings.System.putInt(getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 60000);
@@ -266,7 +266,7 @@ public class settings extends AppCompatActivity{
         Button button_thirdparty_fix = (Button)findViewById(R.id.button_thirdparty_fix);
         int thirdparty_state_int = Settings.Secure.getInt(getContentResolver(), Settings.Secure.INSTALL_NON_MARKET_APPS, 0);
         Log.i("thirdparty", String.valueOf(thirdparty_state_int));
-        if(thirdparty_state_int <= 1 )
+        if(thirdparty_state_int == 0 ) //未知來源關閉：0  未知來源開啟：1
         {
             textView_thirdparty_result.setText("Pass");
             textView_thirdparty_result.setTextColor(Color.BLUE);
@@ -281,10 +281,10 @@ public class settings extends AppCompatActivity{
                 @Override
                 public void onClick(View v) {
                     AlertDialog.Builder thirdparty_repair_ad = new AlertDialog.Builder(settings.this);
-                    thirdparty_repair_ad.setTitle("Third Party Apps");
-                    thirdparty_repair_ad.setMessage("If you do not use the third party apps, please select [Fix] button！");
-                    thirdparty_repair_ad.setNegativeButton("Skip", null);
-                    thirdparty_repair_ad.setPositiveButton("Fix", new DialogInterface.OnClickListener() {
+                    thirdparty_repair_ad.setTitle("應用程式安裝設定");
+                    thirdparty_repair_ad.setMessage("請關閉[安裝未知來源應用程式]功能！");
+                    thirdparty_repair_ad.setNegativeButton("略過", null);
+                    thirdparty_repair_ad.setPositiveButton("修正", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int fix) {
                             startActivity(new Intent(Settings.ACTION_SECURITY_SETTINGS));
@@ -310,10 +310,10 @@ public class settings extends AppCompatActivity{
                 @Override
                 public void onClick(View v) {
                     AlertDialog.Builder wifi_repair_ad = new AlertDialog.Builder(settings.this);
-                    wifi_repair_ad.setTitle("Wi-Fi Setting");
-                    wifi_repair_ad.setMessage("If you do not need wireless function, please select [Fix] button!");
-                    wifi_repair_ad.setNegativeButton("Skip", null);
-                    wifi_repair_ad.setPositiveButton("Fix", new DialogInterface.OnClickListener() {
+                    wifi_repair_ad.setTitle("Wi-Fi設定");
+                    wifi_repair_ad.setMessage("請關閉無線網際網路功能！");
+                    wifi_repair_ad.setNegativeButton("略過", null);
+                    wifi_repair_ad.setPositiveButton("修正", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int fix) {
                             wifiManager.setWifiEnabled(false);
@@ -332,7 +332,7 @@ public class settings extends AppCompatActivity{
         }
         else
         {
-            textView_wifi_result.setText("Unknown");
+            textView_wifi_result.setText("未知");
             textView_wifi_result.setTextColor(Color.GREEN);
             button_wifi_fix.setText("");
             button_wifi_fix.setBackgroundColor(00000000);
@@ -353,10 +353,10 @@ public class settings extends AppCompatActivity{
             button_encrypt_fix.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     AlertDialog.Builder encryptphone_repair_ad = new AlertDialog.Builder(settings.this);
-                    encryptphone_repair_ad.setTitle("Encrypt Phone");
-                    encryptphone_repair_ad.setMessage("You should encrypt your phone now！");
-                    encryptphone_repair_ad.setNegativeButton("Skip", null);
-                    encryptphone_repair_ad.setPositiveButton("Fix", new DialogInterface.OnClickListener()
+                    encryptphone_repair_ad.setTitle("全機加密");
+                    encryptphone_repair_ad.setMessage("請加密您的Android裝置！");
+                    encryptphone_repair_ad.setNegativeButton("略過", null);
+                    encryptphone_repair_ad.setPositiveButton("修正", new DialogInterface.OnClickListener()
                     {
 
                         @Override
@@ -390,10 +390,10 @@ public class settings extends AppCompatActivity{
             button_camera_fix.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     AlertDialog.Builder camera_repair_ad = new AlertDialog.Builder(settings.this);
-                    camera_repair_ad.setTitle("Disable Camera");
-                    camera_repair_ad.setMessage("If you do not need camera, please select [Fix] button！");
-                    camera_repair_ad.setNegativeButton("Skip", null);
-                    camera_repair_ad.setPositiveButton("Fix", new DialogInterface.OnClickListener() {
+                    camera_repair_ad.setTitle("相機設定");
+                    camera_repair_ad.setMessage("請關閉相機功能！");
+                    camera_repair_ad.setNegativeButton("略過", null);
+                    camera_repair_ad.setPositiveButton("修正", new DialogInterface.OnClickListener() {
 
                         @Override
                         public void onClick(DialogInterface dialog, int fix) {
@@ -413,7 +413,7 @@ public class settings extends AppCompatActivity{
         }
         else
         {
-            textView_camera_result.setText("Unknown");
+            textView_camera_result.setText("未知");
             textView_camera_result.setTextColor(Color.GREEN);
             button_camera_fix.setText("");
             button_camera_fix.setBackgroundColor(00000000);
@@ -436,10 +436,10 @@ public class settings extends AppCompatActivity{
             button_cookie_fix.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     AlertDialog.Builder cookie_repair_ad = new AlertDialog.Builder(settings.this);
-                    cookie_repair_ad.setTitle("Cookie Setting");
-                    cookie_repair_ad.setMessage("You should delete cookies now！");
-                    cookie_repair_ad.setNegativeButton("Skip", null);
-                    cookie_repair_ad.setPositiveButton("Fix", new DialogInterface.OnClickListener() {
+                    cookie_repair_ad.setTitle("瀏覽器Cookie設定");
+                    cookie_repair_ad.setMessage("請刪除您的瀏覽器Cookie！");
+                    cookie_repair_ad.setNegativeButton("略過", null);
+                    cookie_repair_ad.setPositiveButton("修正", new DialogInterface.OnClickListener() {
 
                         @Override
                         public void onClick(DialogInterface dialog, int fix) {
@@ -467,7 +467,7 @@ public class settings extends AppCompatActivity{
         if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
             //System.currentTimeMillis()無論何時調用，肯定大於2000
             if((System.currentTimeMillis()-exitTime) > 2000) {
-                Toast.makeText(getApplicationContext(), "Click Again", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "連按兩次即可離開", Toast.LENGTH_SHORT).show();
                 exitTime = System.currentTimeMillis();
             }
             else {

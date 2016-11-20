@@ -15,6 +15,7 @@ import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.provider.Settings;
+import android.support.annotation.StringRes;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -71,8 +72,9 @@ public class MainActivity extends AppCompatActivity {
     private FrameLayout frame_layout;
     private ListView listview_left;
 
+    Context mContext = MainActivity.this;
     String[] Balls = new String[]
-            {"Home","Permission","Intent","Setting"};
+            {"首頁","權限分析","意圖監控","組態設定"};
     private AdapterView.OnItemClickListener listener = new AdapterView.OnItemClickListener()
     {
         @Override
@@ -81,23 +83,23 @@ public class MainActivity extends AppCompatActivity {
             // TODO Auto-generated method stub
             String sel = parent.getItemAtPosition(position).toString();
             //switch不能處理字串型別
-            if (sel.equals("Home"))
+            if (sel.equals("首頁"))
             {}
-            else if (sel.equals("Permission"))
+            else if (sel.equals("權限分析"))
             {
                 Intent intent = new Intent();
                 intent.setClass(MainActivity.this, permission.class);
                 startActivity(intent);
                 MainActivity.this.finish();
             }
-            else if (sel.equals("Intent"))
+            else if (sel.equals("意圖監控"))
             {
                 Intent intent = new Intent();
                 intent.setClass(MainActivity.this, intent.class);
                 startActivity(intent);
                 MainActivity.this.finish();
             }
-            else if (sel.equals("Setting"))
+            else if (sel.equals("組態設定"))
             {
                 Intent intent = new Intent();
                 intent.setClass(MainActivity.this, settings.class);
@@ -138,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
         if(!isAdminActive) {
             Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
             intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, DAN);
-            intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION, "DevicePolicyManager");
+            intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION, "裝置政策管理員");
             startActivityForResult(intent, REQUEST_CODE);
         }
 
@@ -157,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
             //在背景執行之前要做的事，寫在這裡
             //初始化進度條
             myDialog = new ProgressDialog(MainActivity.this);
-            myDialog.setMessage("I will be right here waiting for you");
+            myDialog.setMessage("複雜是工程，簡潔是藝術!");
             myDialog.setCancelable(false);
             myDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
             myDialog.show();
@@ -197,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
                     if (group_permission == null)
                     {
                         group_permission = new String[1];
-                        group_permission[0] = "Do not need any permission!";
+                        group_permission[0] = "不需要任何權限,Good!";
                     }
                     thisapp_score = 0;
                     thisapp_score = calculate.calculatescore(); //計算分數
@@ -247,12 +249,12 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(Integer result) {
             //doInBackground執行完後就會執行此方法
             //通常用來傳資料給UI顯示
-            ((TextView)findViewById(R.id.textView_title1)).setText("Installed Apps = " + appnumber);
+            ((TextView)findViewById(R.id.textView_title1)).setText("已安裝應用程式數量 = " + appnumber);
 
             Cursor res_ave = PiaDb.getAverage(); //取得平均評分
             if (res_ave.getCount() == 0) {
                 //show message
-                showMessage("Error", "No Data Found");
+                showMessage("錯誤", "無任何資料");
             }
             res_ave.moveToFirst(); //把指標移到第一筆資料
             float ave = res_ave.getFloat(0);
@@ -277,7 +279,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             double totaltime = endtime-starttime;
-            button_times.setText("Time="+(totaltime/1000)+"s");
+            button_times.setText("時間="+(totaltime/1000)+"秒");
         }
     }
 
@@ -546,7 +548,7 @@ public class MainActivity extends AppCompatActivity {
                 if(res.getCount()==0) //若資料筆數為0，顯示錯誤訊息
                 {
                     //show message
-                    showMessage("Error", "No Data Found");
+                    showMessage("錯誤", "無任何資料");
                     return;
                 }
 
@@ -560,7 +562,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 //show all data
-                showMessage("Detail", buffer.toString());
+                showMessage("詳細資訊", buffer.toString());
             }
         });
     }
@@ -590,7 +592,7 @@ public class MainActivity extends AppCompatActivity {
         if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
             //System.currentTimeMillis()無論何時調用，肯定大於2000
             if((System.currentTimeMillis()-exitTime) > 2000) {
-                Toast.makeText(getApplicationContext(), "Click Again", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "連按兩次即可離開", Toast.LENGTH_SHORT).show();
                 exitTime = System.currentTimeMillis();
             }
             else {

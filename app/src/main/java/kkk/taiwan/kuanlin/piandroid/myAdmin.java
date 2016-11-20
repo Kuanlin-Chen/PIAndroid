@@ -15,7 +15,7 @@ public class myAdmin extends DeviceAdminReceiver {
 
     void showToast(Context context, String msg) {
         //String status = context.getString(R.string.admin_receiver_status, msg);
-        Toast.makeText(context, "DevicePolicyManager", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "裝置政策管理員", Toast.LENGTH_SHORT).show();
     }
 
     @Override

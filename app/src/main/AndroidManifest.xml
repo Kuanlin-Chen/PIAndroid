@@ -5,17 +5,18 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <!--
     <uses-permission android:name="android.permission.REVOKE_RUNTIME_ERMISSIONS" />
-
+    -->
     <permission
-        android:name="kkk.taiwan.kuanlin.piandroid.permission.ServiceLog"
+        android:name="security.nknu.edu.tw.piandroid.permission.ServiceLog"
         android:label="@string/app_name"
         android:permissionGroup="@string/app_name"
-        android:protectionLevel="dangerous">
+        android:protectionLevel="signature">
     </permission>
 
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
@@ -23,7 +24,6 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -42,7 +42,7 @@
 
         <service
             android:name=".ServiceLog"
-            android:permission="kkk.taiwan.kuanlin.piandroid.permission.ServiceLog">>
+            android:permission="security.nknu.edu.tw.piandroid.permission.ServiceLog">>
             <intent-filter >
               <action android:name="kkk.taiwan.kuanlin.piandroid.action.ServiceLog"/>
               <category android:name="android.intent.category.DEFAULT"/>

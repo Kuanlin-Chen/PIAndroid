@@ -27,7 +27,7 @@ public class ServiceLog extends Service
     @Override
     public int onStartCommand(Intent intent, int flags, int startId)
     {
-        Toast.makeText(getApplicationContext(), "ServiceLog is running", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "正在執行意圖監控", Toast.LENGTH_LONG).show();
         Log.i("ServiceLog", "ServiceLog is running");
         package_name = intent.getExtras().getString("package_name");
         flag = intent.getExtras().getBoolean("flag");
@@ -58,14 +58,16 @@ public class ServiceLog extends Service
 
                         if (kkk.taiwan.kuanlin.piandroid.intent.splitlog == null) {
                             kkk.taiwan.kuanlin.piandroid.intent.splitlog = new String[1];
-                            kkk.taiwan.kuanlin.piandroid.intent.splitlog[0] = "Empty";
+                            kkk.taiwan.kuanlin.piandroid.intent.splitlog[0] = "無任何紀錄";
                         } else {
                             kkk.taiwan.kuanlin.piandroid.intent.splitlog = log.toString().split("\n");
-                            replacelog.replacelog();
+                            //翻譯關鍵字
+                            replace.replace();
+
                         }
                     } catch (IOException e) {
                         kkk.taiwan.kuanlin.piandroid.intent.splitlog = new String[1];
-                        kkk.taiwan.kuanlin.piandroid.intent.splitlog[0] = "Sorry, you do not have super user！";
+                        kkk.taiwan.kuanlin.piandroid.intent.splitlog[0] = "很抱歉，您沒有超級使用者權限(SuperUser)！";
                     }
                 }
             }

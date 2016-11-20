@@ -44,7 +44,7 @@ public class permission extends AppCompatActivity {
     private FrameLayout frame_layout;
     private ListView listview_left;
     String[] Balls = new String[]
-            {"Home","Permission","Intent","Setting"};
+            {"首頁","權限分析","意圖監控","組態設定"};
     private AdapterView.OnItemClickListener listener = new AdapterView.OnItemClickListener()
     {
         @Override
@@ -52,24 +52,23 @@ public class permission extends AppCompatActivity {
                                 long id) {
 
             String sel = parent.getItemAtPosition(position).toString();
-            //switch不能處理字串型別
-            if (sel.equals("Home"))
+            if (sel.equals("首頁"))
             {
                 Intent intent = new Intent();
                 intent.setClass(permission.this, MainActivity.class);
                 startActivity(intent);
                 permission.this.finish();
             }
-            else if (sel.equals("Permission"))
+            else if (sel.equals("權限分析"))
             {}
-            else if (sel.equals("Intent"))
+            else if (sel.equals("意圖監控"))
             {
                 Intent intent = new Intent();
                 intent.setClass(permission.this, intent.class);
                 startActivity(intent);
                 permission.this.finish();
             }
-            else if (sel.equals("Setting"))
+            else if (sel.equals("組態設定"))
             {
                 Intent intent = new Intent();
                 intent.setClass(permission.this, settings.class);
@@ -192,7 +191,7 @@ public class permission extends AppCompatActivity {
         if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
             //System.currentTimeMillis()無論何時調用，肯定大於2000
             if((System.currentTimeMillis()-exitTime) > 2000) {
-                Toast.makeText(getApplicationContext(), "Click Again", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "連按兩次即可離開", Toast.LENGTH_SHORT).show();
                 exitTime = System.currentTimeMillis();
             }
             else {

@@ -72,9 +72,10 @@ public class listpermission extends permission
             public void onClick(View v) {
                 if (group == null) {
                     group = new String[1];
-                    group[0] = "Do not need any permission!";
+                    group[0] = "null";
                 }
-                //replace.replacestring(); //轉中文
+                //轉中文
+                translate.chinese();
                 padapter = new ArrayAdapter<String>
                         (kkk.taiwan.kuanlin.piandroid.listpermission.this, android.R.layout.simple_list_item_1, group);
                 listView_permission.setAdapter(padapter);
@@ -86,10 +87,10 @@ public class listpermission extends permission
             @Override
             public  void onClick(View v) {
                 define = new String[4];
-                define[0] = "[Normal]:\nA lower-risk permission that gives requesting applications access to isolated application-level features, with minimal risk to other applications, the system, or the user.";
-                define[1] = "[Dangerous]:\nA higher-risk permission that would give a requesting application access to private user data or control over the device that can negatively impact the user.";
-                define[2] = "[Signature]:\nA permission that the system grants only if the requesting application is signed with the same certificate as the application that declared the permission.";
-                define[3] = "[SignatureOrSystem]:\nA permission that the system grants only to applications that are in the Android system image or that are signed with the same certificate as the application that declared the permission.";
+                define[0] = "[一般權限]:\n一般權限對於使用者,系統應用程式,裝置本身沒有太大的風險,預設為在安裝時自動被允許。";
+                define[1] = "[危險權限]:\n危險權限因為可以存取隱私資料和使用裝置重要的感測器，所以伴隨著高度的風險，安裝時必須經過使用者同意。";
+                define[2] = "[簽章權限]:\n如果宣告此類權限的應用程式所使用的開發者憑證與被要求的應用程式相同，在安裝時就會自動被允許。";
+                define[3] = "[簽章或系統權限]:\n如果宣告這些權限的應用程式使用了和Android系統本身或其他被要求的應用程式相同的憑證，在安裝時就會自動被允許。";
 
                 padapter = new ArrayAdapter<String>(kkk.taiwan.kuanlin.piandroid.listpermission.this, android.R.layout.simple_list_item_1, define);
                 listView_permission.setAdapter(padapter);
@@ -116,10 +117,10 @@ public class listpermission extends permission
                 Log.i("itemclick", itemclick);
                 if(itemclick.equals("Camera")) {
                     AlertDialog.Builder password_repair_ad = new AlertDialog.Builder(listpermission.this);
-                    password_repair_ad.setTitle("Camera");
-                    password_repair_ad.setMessage("Close camera?");
-                    password_repair_ad.setNegativeButton("Skip", null);
-                    password_repair_ad.setPositiveButton("Revoke", new DialogInterface.OnClickListener() {
+                    password_repair_ad.setTitle("相機");
+                    password_repair_ad.setMessage("關閉相機權限?");
+                    password_repair_ad.setNegativeButton("略過", null);
+                    password_repair_ad.setPositiveButton("撤銷", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int fix) {
                                     try {
